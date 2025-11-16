@@ -100,13 +100,13 @@ app.get("/", async (req, res) => {
     const cupon = 12345;
 
     const cupon_code = { cupon_code: cupon };
-    const company_verfication = await axios.post(
+   /* const company_verfication = await axios.post(
       "http://localhost:5002/zcom/buybook/cuponcode/companyverification",
       cupon_code,
       {
         headers: { "Content-Type": "application/json" },
       }
-    );
+    );*/
 
     console.log("Companyvewrfication:", company_verfication);
 
@@ -894,8 +894,8 @@ app.post("/api/pay/create", (req, res) => {
     hash,
 
     // success & failure redirect URLs (use your localhost in sandbox)
-    surl: `http://localhost:${PORT}/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
-    furl: `http://localhost:${PORT}/payment/failure?txnid=${txnid}&points=${points}`,
+    surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
+    furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
   });
 });
 
@@ -981,7 +981,7 @@ app.post("/payment/success", async (req, res) => {
             }
           );
 
-          const redirectUrl = `http://localhost:${frontend_port}/startgame/${id}`;
+          const redirectUrl = `http://emng.in/startgame/${id}`;
           return res.redirect(redirectUrl);
           // res.json({ success: true, message: "points hasbeen collected" });
         });
