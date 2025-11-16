@@ -57,9 +57,17 @@ app.use(
 app.get("/api/database_check", async (req, res) => {
 db.connect((err) => {
   if (err) {
-    console.error(" MySQL connection error:", err);
+
+    res.json({
+      error: err
+    });
+   // console.error(" MySQL connection error:", err);
   } else {
-    console.log(" Connected to MySQL database!");
+
+    res.json({
+      status: "success connected"
+    });
+  //  console.log(" Connected to MySQL database!");
   }
 });
 })
