@@ -882,7 +882,7 @@ app.post("/api/pay/create", (req, res) => {
   const hash = crypto.createHash("sha512").update(hashString).digest("hex");
 
   // Response: front-end will post form to PAYU_URL using these params OR you forward user server side.
-  res.json({
+  /*res.json({
     action: "https://test.payu.in/_payment",
     key: PAYU_KEY,
     txnid,
@@ -897,6 +897,53 @@ app.post("/api/pay/create", (req, res) => {
     surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
     furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
   });
+
+*/
+
+
+
+
+
+const data = {
+    key: PAYU_KEY,
+    txnid,
+    amount,
+    productinfo,
+    firstname,
+    email,
+    phone,
+    hash,
+    surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
+    furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
+  };
+
+  let html = `
+    <html>
+      <body onload="document.forms[0].submit()">
+        <form method="POST" action="https://test.payu.in/_payment">
+  `;
+
+  Object.entries(data).forEach(([k, v]) => {
+    html += `<input type="hidden" name="${k}" value="${v}"/>`;
+  });
+
+  html += `
+        </form>
+      </body>
+    </html>
+  `;
+
+  res.send(html);
+
+
+
+
+
+
+
+
+
+
 });
 
 // Example: endpoint to create a payment payload
