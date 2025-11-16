@@ -48,11 +48,11 @@ app.use(
 
  const db = mysql.createConnection({
   host: process.env.host,
-  user: process.env.user, // your MySQL username
-  password: process.env.password, // your MySQL password
-  database: process.env.database // your database
+  user: process.env.user, 
+  password: process.env.password, 
+  database: process.env.database,
+  port: 3306
 });
-
 
 
 
