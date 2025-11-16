@@ -843,8 +843,8 @@ app.post("/api/generate-key", (req, res) => {
 
 // read keys from env
 
-const  PAYU_KEY=process.env.PAYU_KEY
-const PAYU_SALT = process.env.PAYU_SALT
+const  PAYU_KEY="rCB06F"
+const PAYU_SALT = "FH1LOpG98Tu3tiyoB2kFy26BYIv9rPnp"
 const PAYU_URL = process.env.PAYU_URL             // sandbox payment endpoint
 const payuClient = new PayU(
   {
