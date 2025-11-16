@@ -54,6 +54,26 @@ app.use(
 });
 
 
+
+
+
+
+app.get("/api/check", async (req, res) => {
+
+
+  res.json({
+     connect:" backend connect"
+    });
+
+})
+
+
+
+
+
+
+
+
 app.get("/api/database_check", async (req, res) => {
 db.connect((err) => {
   if (err) {
