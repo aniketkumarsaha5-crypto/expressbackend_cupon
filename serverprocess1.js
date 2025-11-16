@@ -861,15 +861,11 @@ function generateTxnId() {
 
 // Example: endpoint to create a payment payload
 
-app.get("/api/pay/create", (req, res) => {
+app.post("/api/pay/create", (req, res) => {
   let amount = 0.0332;
-// const { id, firstname, email, points } = req.body;
+  const { id, firstname, email, points } = req.body;
 
   // console.log(id,firstname);
-
-
-  const { id, points } = req.query;
-
 
   let poin = parseInt(points);
   console.log("poin", poin);
@@ -886,7 +882,7 @@ app.get("/api/pay/create", (req, res) => {
   const hash = crypto.createHash("sha512").update(hashString).digest("hex");
 
   // Response: front-end will post form to PAYU_URL using these params OR you forward user server side.
-  /*res.json({
+  res.json({
     action: "https://test.payu.in/_payment",
     key: PAYU_KEY,
     txnid,
@@ -902,12 +898,12 @@ app.get("/api/pay/create", (req, res) => {
     furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
   });
 
-*/
 
 
 
 
 
+/*
 const data = {
     key: PAYU_KEY,
     txnid,
@@ -944,7 +940,7 @@ const data = {
 
 
 
-
+*/
 
 
 
