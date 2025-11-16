@@ -50,11 +50,11 @@ app.use(
   host: process.env.host,
   user: process.env.user, // your MySQL username
   password: process.env.password, // your MySQL password
-  database: process.env.database, // your database
+  database: process.env.database // your database
 });
 
 
-
+app.get("/api/database_check", async (req, res) => {
 db.connect((err) => {
   if (err) {
     console.error(" MySQL connection error:", err);
@@ -62,7 +62,7 @@ db.connect((err) => {
     console.log(" Connected to MySQL database!");
   }
 });
-
+}
 /*starting main working   function */
 
 /*from my company to z.company  makeing a  first call-1)*/
