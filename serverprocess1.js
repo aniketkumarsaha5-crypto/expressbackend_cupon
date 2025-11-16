@@ -62,7 +62,7 @@ db.connect((err) => {
     console.log(" Connected to MySQL database!");
   }
 });
-}
+})
 /*starting main working   function */
 
 /*from my company to z.company  makeing a  first call-1)*/
