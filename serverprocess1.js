@@ -883,7 +883,7 @@ app.post("/api/pay/create", (req, res) => {
 
   // Response: front-end will post form to PAYU_URL using these params OR you forward user server side.
   res.json({
-    action: PAYU_URL,
+    action: "https://test.payu.in/_payment",
     key: PAYU_KEY,
     txnid,
     amount,
