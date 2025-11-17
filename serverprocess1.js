@@ -894,8 +894,8 @@ app.post("/api/pay/create", async(req, res) => {
     hash,
 
     // success & failure redirect URLs (use your localhost in sandbox)
-    surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
-    furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
+    surl: `https://gamecuponbackend1.up.railway.app/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
+    furl: `https://gamecuponbackend1.up.railway.app/payment/failure?txnid=${txnid}&points=${points}`,
   });
 
 
