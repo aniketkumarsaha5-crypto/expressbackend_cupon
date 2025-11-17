@@ -882,7 +882,7 @@ app.post("/api/pay/create", async(req, res) => {
   const hash = crypto.createHash("sha512").update(hashString).digest("hex");
 
   // Response: front-end will post form to PAYU_URL using these params OR you forward user server side.
-  /*res.json({
+  res.json({
     action: "https://test.payu.in/_payment",
     key: PAYU_KEY,
     txnid,
@@ -897,11 +897,11 @@ app.post("/api/pay/create", async(req, res) => {
     surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
     furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
   });
-*/
+
 
 
 // Possible value  = TEST/LIVE
-  try {
+ /* try {
     const result = await payuClient.paymentInitiate({
       key: PAYU_KEY,
       txnid: txnid,
@@ -920,7 +920,7 @@ res.send(result);
     console.log("PAYU ERROR:", err);
   }
 
-
+*/
 
 
 /*
