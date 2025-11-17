@@ -975,7 +975,7 @@ app.post("/payment/failure", (req, res) => {
   res.send("Payment Failure");
 });
 
-app.post("/payment/success", async (req, res) => {
+app.get("/payment/success", async (req, res) => {
   // const {amount, firstname,email  } = req.body;
   //const { txnid, amount, udf1: userId } = req.body;
 
