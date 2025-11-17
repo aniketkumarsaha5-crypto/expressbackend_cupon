@@ -843,9 +843,9 @@ app.post("/api/generate-key", (req, res) => {
 
 // read keys from env
 
-const  PAYU_KEY="rCB06F"
-const PAYU_SALT = "FH1LOpG98Tu3tiyoB2kFy26BYIv9rPnp"
-const PAYU_URL = process.env.PAYU_URL             // sandbox payment endpoint
+const  PAYU_KEY="rCB06F";
+const PAYU_SALT = "FH1LOpG98Tu3tiyoB2kFy26BYIv9rPnp";
+const PAYU_URL = process.env.PAYU_URL          
 const payuClient = new PayU(
   {
     key: PAYU_KEY, // Your merchant key
@@ -861,7 +861,7 @@ function generateTxnId() {
 
 // Example: endpoint to create a payment payload
 
-app.post("/api/pay/create", (req, res) => {
+app.post("/api/pay/create", async(req, res) => {
   let amount = 0.0332;
   const { id, firstname, email, points } = req.body;
 
@@ -882,7 +882,7 @@ app.post("/api/pay/create", (req, res) => {
   const hash = crypto.createHash("sha512").update(hashString).digest("hex");
 
   // Response: front-end will post form to PAYU_URL using these params OR you forward user server side.
-  res.json({
+  /*res.json({
     action: "https://test.payu.in/_payment",
     key: PAYU_KEY,
     txnid,
@@ -897,8 +897,27 @@ app.post("/api/pay/create", (req, res) => {
     surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
     furl: `https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
   });
+*/
 
 
+// Possible value  = TEST/LIVE
+  try {
+    const result = await payuClient.paymentInitiate({
+      key: PAYU_KEY,
+      txnid: txnid,
+      amount: amount,
+      productinfo: "Game Coins",
+      firstname: firstname,
+      email: email,
+      phone: phone,   surl: `http://localhost:${PORT}/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
+    furl: `http://localhost:${PORT}/payment/failure?txnid=${txnid}&points=${points}`,
+       udf1: "", udf2: "", udf3: "", udf4: "", udf5: "",
+    });
+res.send(result);
+   // console.log("PAYU RESPONSE:", result);
+  } catch (err) {
+    console.log("PAYU ERROR:", err);
+  }
 
 
 
