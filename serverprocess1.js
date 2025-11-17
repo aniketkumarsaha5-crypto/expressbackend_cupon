@@ -909,11 +909,12 @@ app.post("/api/pay/create", async(req, res) => {
       productinfo: "Game Coins",
       firstname: firstname,
       email: email,
-      phone: phone,   surl: `http://localhost:${PORT}/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
-    furl: `http://localhost:${PORT}/payment/failure?txnid=${txnid}&points=${points}`,
+      phone: phone,   surl: `https://emng-game-backend.onrender.com/payment/success?txnid=${txnid}&id=${id}&points=${points}`,
+    furl:`https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
        udf1: "", udf2: "", udf3: "", udf4: "", udf5: "",
     });
-res.send(result);
+     return res.json({ success: false, message: "Payu backend call" });
+//res.send(result);
    // console.log("PAYU RESPONSE:", result);
   } catch (err) {
     console.log("PAYU ERROR:", err);
