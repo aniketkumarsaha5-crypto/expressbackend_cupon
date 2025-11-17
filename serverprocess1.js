@@ -913,8 +913,8 @@ app.post("/api/pay/create", async(req, res) => {
     furl:`https://emng-game-backend.onrender.com/payment/failure?txnid=${txnid}&points=${points}`,
        udf1: "", udf2: "", udf3: "", udf4: "", udf5: "",
     });
-     return res.json({ success: false, message: "Payu backend call" });
-//res.send(result);
+    // return res.json({ success: false, message: "Payu backend call" });
+res.send(result);
    // console.log("PAYU RESPONSE:", result);
   } catch (err) {
     console.log("PAYU ERROR:", err);
