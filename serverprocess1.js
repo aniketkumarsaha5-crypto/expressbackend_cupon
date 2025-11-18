@@ -1148,8 +1148,6 @@ app.post("/api/auth/email_autheticate", async (req, res) => {
 
   // Generate random verification code
 
-console.log("verified  s ystem email_sender:",process.env.email_admin_user);
-console.log("pass",pass);
 
   const verificationCode = crypto.randomBytes(3).toString("hex").toUpperCase();
 
