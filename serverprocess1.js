@@ -1156,7 +1156,7 @@ app.post("/api/auth/email_autheticate", async (req, res) => {
 
   // Send email
   const mailOptions = {
-    from:sender_email,
+    from:"aniketkumarsaha5@gmail.com",
     to: email,
     subject: "Email Verification Code",
     text: `Your verification code is: ${verificationCode}`,
