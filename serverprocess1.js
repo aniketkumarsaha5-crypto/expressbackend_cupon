@@ -1131,12 +1131,13 @@ app.post("/api/auth/verify", (req, res) => {
 
 // email  authenticate verification:
 
-const pass=process.env.pass
+//const pass=process.env.pass;
+const sender_email="aniketkumarsaha5@gmail.com";
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.email_admin_user,
-    pass: pass,
+    user: "aniketkumarsaha5@gmail.com",
+    pass: "elee suee lpvy miiz",
   },
 });
 
@@ -1146,6 +1147,10 @@ app.post("/api/auth/email_autheticate", async (req, res) => {
   if (!email) return res.status(400).json({ message: "Email required" });
 
   // Generate random verification code
+
+console.log("verified  s ystem email_sender:",process.env.email_admin_user);
+console.log("pass",pass);
+
   const verificationCode = crypto.randomBytes(3).toString("hex").toUpperCase();
 
   // Store user temporarily (replace with DB logic)
@@ -1153,7 +1158,7 @@ app.post("/api/auth/email_autheticate", async (req, res) => {
 
   // Send email
   const mailOptions = {
-    from: process.env.email_admin_user,
+    from:sender_email,
     to: email,
     subject: "Email Verification Code",
     text: `Your verification code is: ${verificationCode}`,
