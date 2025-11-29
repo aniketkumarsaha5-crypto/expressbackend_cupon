@@ -251,10 +251,9 @@ passport.deserializeUser((user, done) => done(null, user));
 passport.use(
   new GoogleStrategy(
     {
-      clientID:
-        process.env.Google_client_id,
-      clientSecret: process.env.Google_secret_key,
-      callbackURL: `http://localhost:${PORT}/google/callback`,
+      clientID:"1002399782060-2ufe3edahpjboj030thh8ij3b8phlob4.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: `https://gamecuponbackend1.up.railway.app/google/callback`,
     },
     (accessToken, refreshToken, profile, done) => {
       // Here, you can save user info to DB if needed
@@ -263,22 +262,33 @@ passport.use(
   )
 );
 
-// Routes
+
+
+   //Routes    
+
 app.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
+
+
 app.get(
   "/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: `http://localhost:${frontend_port}/login`,
+  passport.authenticate("google",  {
+    failureRedirect: `https://www.emng.in/login`,
   }),
   (req, res) => {
     // On success, redirect to frontend
-    res.redirect(`http://localhost:${frontend_port}/startgame/${req.user.emails[0].value}`);
+    res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
   }
-);
+)  ;
+
+
+
+
+
+
 
 app.get("/logout", (req, res) => {
   req.logout((err) => {
@@ -293,9 +303,13 @@ app.get("/logout", (req, res) => {
   });
 });
 
+
+
+
+
+
 app.post("/api/faceapi", (req, res) => {
-  console.log(req.body);
-});
+  console.log(req.body);});
 
 app.post("/api/signup", (req, res) => {
   const { name, email, phone, address, password } = req.body;
