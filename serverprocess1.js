@@ -293,7 +293,7 @@ let email =req.user.emails[0].value;
     }
 
     const user = results[0];
-    console.log(user, password);
+   // console.log(user, password);
 
     //const isMatch = await bcrypt.compare(password, user.password);
     //console.log("ismatch:",isMatch)
