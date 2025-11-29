@@ -292,6 +292,39 @@ let email =req.user.emails[0].value;
       return res.status(500).json({ success: false, message: err.message });
 
     if (results.length === 0)  {
+
+
+let phone="9334567890";
+let name=req.user.emails[0].value;
+let address="fdcfsdccxcxxcx";
+let password=email;
+
+  const sql =
+    "INSERT INTO signup (name, email, phone, address, password) VALUES (?, ?, ?, ?, ?)";
+  db.query(sql, [name, email, phone, address, password], (err, result) => {
+    if (err) {
+      if (err.code === "ER_DUP_ENTRY") {
+        return res.status(400).json({ message: "Email already exists" });
+      }
+      return res.status(500).json({ message: "Database error" });
+    }
+   
+    // KYC DETAILS  FALSE3 FALSE  INITIALIZATION
+
+   
+
+  
+  });
+
+
+
+
+
+
+
+
+
+
     const sql2 = "INSERT INTO user_scorecard (email, 	score) VALUES (?, ?)";
     db.query(sql2, [email, score], (err2, result2) => {
       if (err2) {
