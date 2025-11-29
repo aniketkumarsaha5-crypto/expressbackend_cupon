@@ -284,7 +284,7 @@ app.get(
 
 
 
-
+let score=0;
 let email =req.user.emails[0].value;
  const sql = "SELECT * FROM signup WHERE email = ?";
   db.query(sql, [email], async (err, results) => {
@@ -327,7 +327,7 @@ res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
 
     //const isMatch = await bcrypt.compare(password, user.password);
     //console.log("ismatch:",isMatch)
-let score=0;
+
 if(user.email===email)
 {
 
