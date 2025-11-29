@@ -282,32 +282,17 @@ app.get(
     // On success, redirect to frontend
   
 
+
+
+
 let email =req.user.emails[0].value;
  const sql = "SELECT * FROM signup WHERE email = ?";
   db.query(sql, [email], async (err, results) => {
     if (err)
       return res.status(500).json({ success: false, message: err.message });
 
-    if (results.length === 0) {
-      return res.json({ success: false, message: "Invalid email" });
-    }
-
-    const user = results[0];
-   // console.log(user, password);
-
-    //const isMatch = await bcrypt.compare(password, user.password);
-    //console.log("ismatch:",isMatch)
-let score=0;
-if(user.email===email)
-{
-
- res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
-}
-    // Successful login
-
-
-    else{
-const sql2 = "INSERT INTO user_scorecard (email, 	score) VALUES (?, ?)";
+    if (results.length === 0)  {
+    const sql2 = "INSERT INTO user_scorecard (email, 	score) VALUES (?, ?)";
     db.query(sql2, [email, score], (err2, result2) => {
       if (err2) {
         return res
@@ -318,7 +303,7 @@ const sql2 = "INSERT INTO user_scorecard (email, 	score) VALUES (?, ?)";
       // Success response
       let succes_ready_score = true;
     });
-
+  
     // KYC DETAILS  FALSE3 FALSE  INITIALIZATION
 
     const sql3 =
@@ -336,6 +321,26 @@ const sql2 = "INSERT INTO user_scorecard (email, 	score) VALUES (?, ?)";
 res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
 
     }
+
+    const user = results[0];
+   // console.log(user, password);
+
+    //const isMatch = await bcrypt.compare(password, user.password);
+    //console.log("ismatch:",isMatch)
+let score=0;
+if(user.email===email)
+{
+
+ res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
+}
+    // Successful login
+
+else{
+
+res.redirect(`https://www.emng.in/login`);
+
+}
+ 
     
   });
 
