@@ -321,25 +321,24 @@ let email =req.user.emails[0].value;
 res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
 
     }
+else{
 
-    const user = results[0];
+
+
+     const user = results[0];
    // console.log(user, password);
 
     //const isMatch = await bcrypt.compare(password, user.password);
     //console.log("ismatch:",isMatch)
 
-if(user.email===email)
-{
 
  res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
-}
+
     // Successful login
 
-else{
-
-res.redirect(`https://www.emng.in/login`);
 
 }
+ 
  
     
   });
