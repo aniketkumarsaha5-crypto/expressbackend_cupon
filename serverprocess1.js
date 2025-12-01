@@ -15,7 +15,9 @@ import qrcode from "qrcode";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
-
+import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
 
 //import LinkedInStrategy from "passport-linkedin-oauth2";
 
@@ -404,7 +406,7 @@ app.post("/upload", upload.single("image"), (req, res) => {
     return res.status(400).json({ success: false, message: "No file uploaded" });
   }
 
-  
+
   const imageUrl = `https://gamecuponbackend1.up.railway.app/uploads/${req.file.filename}`;
 
   // First, check if user already has an image
