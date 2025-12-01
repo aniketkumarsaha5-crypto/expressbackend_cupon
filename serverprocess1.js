@@ -351,7 +351,7 @@ let password=email;
       // Success response
       let succes_ready_score = true;
     });
-res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
+res.redirect(`https://www.emng.in/User_home/${req.user.emails[0].value}`);
 
     }
 else{
@@ -364,8 +364,8 @@ else{
     //const isMatch = await bcrypt.compare(password, user.password);
     //console.log("ismatch:",isMatch)
 
-
- res.redirect(`https://www.emng.in/startgame/${req.user.emails[0].value}`);
+//`/User_home/${res.data.user.email}`
+ res.redirect(`https://www.emng.in/User_home/${req.user.emails[0].value}`);
 
     // Successful login
 
@@ -386,6 +386,74 @@ else{
 })  ;
 
 
+
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "uploads/"),
+  filename: (req, file, cb) =>
+    cb(null, Date.now() + path.extname(file.originalname)),
+});
+const upload = multer({ storage });
+
+// API route
+app.post("/upload", upload.single("image"), (req, res) => {
+  const { email } = req.body;
+
+  if (!req.file) {
+    return res.status(400).json({ success: false, message: "No file uploaded" });
+  }
+
+  
+  const imageUrl = `https://gamecuponbackend1.up.railway.app/uploads/${req.file.filename}`;
+
+  // First, check if user already has an image
+  const sqlCheck = "SELECT * FROM users_image WHERE user_id = ?";
+  db.query(sqlCheck, [email], (err, results) => {
+    if (err) {
+      return res.status(500).json({ success: false, message: err.message });
+    }
+
+    if (results.length === 0) {
+      // INSERT new record
+      const sqlInsert = "INSERT INTO users_image (image_url, user_id) VALUES (?, ?)";
+      db.query(sqlInsert, [imageUrl, email], (err2, result2) => {
+        if (err2) {
+          return res.status(500).json({
+            success: false,
+            message: "Error saving user details",
+            error: err2,
+          });
+        }
+
+        // Success response for INSERT
+        return res.json({
+          success: true,
+          message: "User image added successfully!",
+          url: imageUrl,
+        });
+      });
+    } else {
+      // UPDATE existing record
+      const sqlUpdate = "UPDATE users_image SET image_url = ? WHERE user_id = ?";
+      db.query(sqlUpdate, [imageUrl, email], (err3, result3) => {
+        if (err3) {
+          return res.status(500).json({
+            success: false,
+            message: "Database error",
+            error: err3,
+          });
+        }
+
+        return res.json({
+          success: true,
+          message: "User image updated successfully!",
+          url: imageUrl,
+        });
+      });
+    }
+  });
+});
 
 
 
