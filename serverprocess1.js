@@ -420,13 +420,19 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // API route
-app.post("/upload", upload.single("image"), (req, res) => {
-  const { email } = req.body;
+app.post("/upload/:id", upload.single("image"), (req, res) => {
+  const { email } = req.params.id;
+
+
+
 
   if (!req.file) {
     return res.status(400).json({ success: false, message: "No file uploaded" });
   }
 
+
+
+  
 
   const imageUrl = `https://gamecuponbackend1.up.railway.app/uploads/${req.file.filename}`;
 
