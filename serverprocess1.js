@@ -389,7 +389,7 @@ else{
 
 
 
-
+app.use("/uploads", express.static("uploads"));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
