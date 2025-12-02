@@ -387,6 +387,27 @@ else{
   }*/
 })  ;
 
+app.get("/get-images/:user_id", (req, res) => {
+  const user_id = req.params.user_id;
+
+  const sql = "SELECT * FROM users_image WHERE user_id = ? ORDER BY id DESC";
+
+  db.query(sql, [user_id], (err, results) => {
+    if (err) {
+      return res.json({ status: "error", error: err });
+    }
+
+    // convert filename → full URL path
+    const data = results.map((row) => ({
+      ...row,
+      url: `https://gamecuponbackend1.up.railway.app/uploads/${row.filename}`,
+    }));
+
+    res.json(data);
+  });
+});
+
+
 
 
 app.use("/uploads", express.static("uploads"));
